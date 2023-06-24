@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./page.module.css";
 
 const campaigns = [
@@ -56,15 +57,6 @@ const campaigns = [
 export default function Home() {
   return (
     <main className={styles.main}>
-      <header className={styles.header}>
-        <h2 className={styles.logo}>
-          Agasalha<span>App</span>
-        </h2>
-        <div className={styles.avatar}>
-          <span className={styles.avatar__fallback} />
-        </div>
-      </header>
-
       <form className={styles.location}>
         <label className={styles.location__label}>Localização</label>
         <div className={styles.location__input_wrapper}>
@@ -127,7 +119,9 @@ export default function Home() {
                   doadores
                 </span>
               </div>
-              <a className={styles.campaning__button}>Ver Detalhes</a>
+              <Link href="/campaing" className={styles.campaning__button}>
+                Ver Detalhes
+              </Link>
             </div>
           ))}
         </div>

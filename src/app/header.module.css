@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* padding: 1rem inherit; */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.logo {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.logo span {
+  color: #000;
+}
+
+.avatar {
+  --size: 1.6875rem;
+
+  display: flex;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  overflow: hidden;
+  border: var(--border-width) solid var(--color-primary);
+  background-color: rgba(var(--color-primary-rgb), 30%);
+}
