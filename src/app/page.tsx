@@ -1,95 +1,137 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import styles from "./page.module.css";
+
+const campaigns = [
+  {
+    name: 'Campanha do Agasalho "Mãos Solidárias"',
+    organizer: "ONG Coração Quente",
+    location: "Comunidade Esperança, Cidade do Sol",
+  },
+  {
+    name: "Aquecendo Corações: Campanha de Inverno",
+    organizer: "Empresa Solidariedade S.A.",
+    location: "Centro Comunitário da Vila Nova, Rua das Flores",
+  },
+  {
+    name: "Inverno Sem Frio: Doe Agasalhos!",
+    organizer: "Prefeitura Solidária",
+    location: "Praça da Solidariedade, Centro da Cidade",
+  },
+  {
+    name: "Abraço Quentinho: Campanha de Agasalhos",
+    organizer: "ONG Amor Fraterno",
+    location: "Bairro do Amor, Rua da Paz",
+  },
+  {
+    name: "Campanha Calor Humano",
+    organizer: "Empresa Cuidado e Compaixão Ltda.",
+    location: "Abrigo Esperança, Avenida das Flores",
+  },
+  {
+    name: "Aconchego na Estação: Doe Agasalhos!",
+    organizer: "Prefeitura Solidária",
+    location: "Ginásio Municipal, Rua do Esporte",
+  },
+  {
+    name: "Inverno Fraterno: Campanha do Agasalho",
+    organizer: "ONG Mãos Estendidas",
+    location: "Escola Solidária, Rua da Generosidade",
+  },
+  {
+    name: "Compartilhe o Calor: Campanha de Inverno",
+    organizer: "Empresa Solidariedade em Ação",
+    location: "Centro de Assistência Social, Avenida da Esperança",
+  },
+  {
+    name: "Agasalhe com Amor: Campanha do Frio",
+    organizer: "Prefeitura Solidária",
+    location: "Parque da Cidadania, Praça da União",
+  },
+  {
+    name: "União Quentinha: Campanha de Agasalhos",
+    organizer: "ONG Amor Sem Fronteiras",
+    location: "Centro Cultural Solidário, Rua da Fraternidade",
+  },
+];
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <header className={styles.header}>
+        <h2 className={styles.logo}>
+          Agasalha<span>App</span>
+        </h2>
+        <div className={styles.avatar}>
+          <span className={styles.avatar__fallback} />
         </div>
-      </div>
+      </header>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <form className={styles.location}>
+        <label className={styles.location__label}>Localização</label>
+        <div className={styles.location__input_wrapper}>
+          <input
+            className={styles.location__input}
+            type="text"
+            value="Rio de Janeiro"
+          />
+          <svg
+            className={styles.location__icon}
+            viewBox="0 0 15 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.72922 19.5965C1.05352 11.3684 0 10.5239 0 7.5C0 3.35785 3.35785 0 7.5 0C11.6421 0 15 3.35785 15 7.5C15 10.5239 13.9465 11.3684 8.27078 19.5965C7.89832 20.1345 7.10164 20.1345 6.72922 19.5965ZM7.5 10.625C9.2259 10.625 10.625 9.2259 10.625 7.5C10.625 5.7741 9.2259 4.375 7.5 4.375C5.7741 4.375 4.375 5.7741 4.375 7.5C4.375 9.2259 5.7741 10.625 7.5 10.625Z"
+              fill="#F14E24"
+              fill-opacity="0.6"
+            />
+          </svg>
+        </div>
+      </form>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+      <section className={styles.campaings}>
+        <h2 className={styles.campaings__title}>Campanhas Próximas</h2>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+        <div className={styles.campaings__list}>
+          {campaigns.map((campaign, index) => (
+            <div key={index} className={styles.campaings__card}>
+              <div className={styles.campaing__title}>
+                <h3>{campaign.name}</h3>
+                <span>{campaign.organizer}</span>
+              </div>
+              <h4 className={styles.campaing__location}>
+                <svg
+                  viewBox="0 0 15 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.72922 19.5965C1.05352 11.3684 0 10.5239 0 7.5C0 3.35785 3.35785 0 7.5 0C11.6421 0 15 3.35785 15 7.5C15 10.5239 13.9465 11.3684 8.27078 19.5965C7.89832 20.1345 7.10164 20.1345 6.72922 19.5965ZM7.5 10.625C9.2259 10.625 10.625 9.2259 10.625 7.5C10.625 5.7741 9.2259 4.375 7.5 4.375C5.7741 4.375 4.375 5.7741 4.375 7.5C4.375 9.2259 5.7741 10.625 7.5 10.625Z"
+                    fill="#F14E24"
+                    fill-opacity="0.6"
+                  />
+                </svg>
+                {campaign.location}
+              </h4>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+              <div className={styles.campaing__donators}>
+                <div className={styles.campaing__donators_list}>
+                  <div className={styles.campaing_donator}></div>
+                  <div className={styles.campaing_donator}></div>
+                  <div className={styles.campaing_donator}></div>
+                </div>
+                <span className={styles.campaing_donators_count}>
+                  {
+                    // random number of 50 to 1000
+                    Math.floor(Math.random() * 1000) + 50
+                  }{" "}
+                  doadores
+                </span>
+              </div>
+              <a className={styles.campaning__button}>Ver Detalhes</a>
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
-  )
+  );
 }
