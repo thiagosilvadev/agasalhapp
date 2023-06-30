@@ -3,14 +3,9 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import { supabase } from "@/lib/supabase";
 
-export default async function Home() {
-  const { data: campaigns, error } = await supabase
-    .from("campaings")
-    .select("*");
-  if (!campaigns || error) notFound();
-
+export default function Home({ campaigns }: { campaigns: any }) {
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <form className={styles.location}>
         <label className={styles.location__label}>Localização</label>
         <div className={styles.location__input_wrapper}>
@@ -37,7 +32,7 @@ export default async function Home() {
         <h2 className={styles.campaings__title}>Campanhas Próximas</h2>
 
         <div className={styles.campaings__list}>
-          {campaigns.map((campaign, index) => (
+          {campaigns.map((campaign: any, index: number) => (
             <div key={campaign.id} className={styles.campaings__card}>
               <div className={styles.campaing__title}>
                 <h3>{campaign.title}</h3>
@@ -82,6 +77,19 @@ export default async function Home() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
+}
+
+export async function getServerSideProps() {
+  const { data: campaigns, error } = await supabase
+    .from("campaings")
+    .select("*");
+  if (!campaigns || error) notFound();
+
+  return {
+    props: {
+      campaigns,
+    },
+  };
 }

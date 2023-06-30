@@ -3,18 +3,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { supabase } from "@/lib/supabase";
 
-export default async function Page({
-  params: { id },
-}: {
-  params: {
-    id: string;
-  };
-}) {
-  const { data: campaign } = await supabase
-    .from("campaings")
-    .select("*")
-    .eq("id", Number(id))
-    .single();
+export default function Page({ campaign }: { campaign: any }) {
   return (
     <main className={styles.main}>
       <div className={styles.cover}>
@@ -44,4 +33,24 @@ export default async function Page({
       </section>
     </main>
   );
+}
+
+export async function getServerSideProps({
+  params,
+}: {
+  params: {
+    id: string;
+  };
+}) {
+  const { data: campaign } = await supabase
+    .from("campaings")
+    .select("*")
+    .eq("id", Number(params.id))
+    .single();
+
+  return {
+    props: {
+      campaign,
+    },
+  };
 }
