@@ -1,60 +1,14 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import styles from "./page.module.css";
+import { supabase } from "@/lib/supabase";
 
-const campaigns = [
-  {
-    name: 'Campanha do Agasalho "Mãos Solidárias"',
-    organizer: "ONG Coração Quente",
-    location: "Comunidade Esperança, Cidade do Sol",
-  },
-  {
-    name: "Aquecendo Corações: Campanha de Inverno",
-    organizer: "Empresa Solidariedade S.A.",
-    location: "Centro Comunitário da Vila Nova, Rua das Flores",
-  },
-  {
-    name: "Inverno Sem Frio: Doe Agasalhos!",
-    organizer: "Prefeitura Solidária",
-    location: "Praça da Solidariedade, Centro da Cidade",
-  },
-  {
-    name: "Abraço Quentinho: Campanha de Agasalhos",
-    organizer: "ONG Amor Fraterno",
-    location: "Bairro do Amor, Rua da Paz",
-  },
-  {
-    name: "Campanha Calor Humano",
-    organizer: "Empresa Cuidado e Compaixão Ltda.",
-    location: "Abrigo Esperança, Avenida das Flores",
-  },
-  {
-    name: "Aconchego na Estação: Doe Agasalhos!",
-    organizer: "Prefeitura Solidária",
-    location: "Ginásio Municipal, Rua do Esporte",
-  },
-  {
-    name: "Inverno Fraterno: Campanha do Agasalho",
-    organizer: "ONG Mãos Estendidas",
-    location: "Escola Solidária, Rua da Generosidade",
-  },
-  {
-    name: "Compartilhe o Calor: Campanha de Inverno",
-    organizer: "Empresa Solidariedade em Ação",
-    location: "Centro de Assistência Social, Avenida da Esperança",
-  },
-  {
-    name: "Agasalhe com Amor: Campanha do Frio",
-    organizer: "Prefeitura Solidária",
-    location: "Parque da Cidadania, Praça da União",
-  },
-  {
-    name: "União Quentinha: Campanha de Agasalhos",
-    organizer: "ONG Amor Sem Fronteiras",
-    location: "Centro Cultural Solidário, Rua da Fraternidade",
-  },
-];
+export default async function Home() {
+  const { data: campaigns, error } = await supabase
+    .from("campaings")
+    .select("*");
+  if (!campaigns || error) notFound();
 
-export default function Home() {
   return (
     <main className={styles.main}>
       <form className={styles.location}>
@@ -79,15 +33,14 @@ export default function Home() {
           </svg>
         </div>
       </form>
-
       <section className={styles.campaings}>
         <h2 className={styles.campaings__title}>Campanhas Próximas</h2>
 
         <div className={styles.campaings__list}>
           {campaigns.map((campaign, index) => (
-            <div key={index} className={styles.campaings__card}>
+            <div key={campaign.id} className={styles.campaings__card}>
               <div className={styles.campaing__title}>
-                <h3>{campaign.name}</h3>
+                <h3>{campaign.title}</h3>
                 <span>{campaign.organizer}</span>
               </div>
               <h4 className={styles.campaing__location}>
@@ -119,7 +72,10 @@ export default function Home() {
                   doadores
                 </span>
               </div>
-              <Link href="/campaing" className={styles.campaning__button}>
+              <Link
+                href={`/campaign/${campaign.id}`}
+                className={styles.campaning__button}
+              >
                 Ver Detalhes
               </Link>
             </div>
